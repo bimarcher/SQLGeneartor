@@ -82,7 +82,7 @@ const generator = {
     }
     fs.writeFile('./sql/' + schemaConfig.schemaName + '.sql', sql, function (err) {
         if (err) throw err
-        log.info('./sql/' + schemaConfig.schemaName + '.sql is saved!')
+        log.info('./sql/' + schemaConfig.schemaName + '.sql is saved! ' + schemaConfig.tables.length + 'tables' )
     })
   }
 }
