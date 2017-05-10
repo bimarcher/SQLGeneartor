@@ -39,4 +39,3 @@ jspm_packages
 # private file
 sql
 schema-config.js
-schema.conf
