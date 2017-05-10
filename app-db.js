@@ -1,32 +1,12 @@
 const fs = require('fs')
-const moment = require("moment")
 const exec = require('child_process').exec
 
-const schema = require('./schema-config')
+const log = require('./log').Log
 
-const mysqlDBList = [
-  {
-    host: 'localhost',
-    user: 'root',
-    pw: 'mysql.root'
-  },
-  {
-    host: '10.0.177.242',
-    user: 'root',
-    pw: 'tyTeam666'
-  }
-]
+const schema = require('./conf/schema-config')
+const mysqlDBList = require('./conf/db-config').dbList
 
 const sqlFile = './sql/' + schema.schemaName + '.sql'
-
-const log = {
-  prefix: function(){
-    return '@@@ debug by archer @@@ ' + moment().format('YYYY-MM-DD HH:mm:ss:SSS' + ' : ' )
-  },
-  info: function(info){
-    console.log(this.prefix() + info)
-  }
-}
 
 for(let i = 0; i < mysqlDBList.length; i++){
   const mysqlDB = mysqlDBList[i]
@@ -36,6 +16,8 @@ for(let i = 0; i < mysqlDBList.length; i++){
       console.error(`exec error: ${error}`)
       return
     }
+    log.info(`stdout: ${stdout}`);
+    log.info(`stderr: ${stderr}`);
     log.info(mysqlDB.host + ' is updated!')
   })
 }
