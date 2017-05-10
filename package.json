@@ -1,0 +1,17 @@
+{
+  "name": "sql-geneartor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "sql": "node app.js"
+  },
+  "author": "archer",
+  "license": "ISC",
+  "dependencies": {
+    "moment": "^2.18.1",
+    "xlsx": "^0.9.13"
+  }
+}
