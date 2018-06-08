@@ -6,7 +6,7 @@ const log = require('./lib/log').Log
 const schema = require('./conf/schema-config')
 const mysqlDBList = require('./conf/db-config').dbList
 
-const sqlFile = './sql/' + schema.schemaName + '.sql'
+const sqlFile = './output/' + schema.schemaName + '.sql'
 
 for(let i = 0; i < mysqlDBList.length; i++){
   const mysqlDB = mysqlDBList[i]
