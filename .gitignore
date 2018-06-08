@@ -35,3 +35,7 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+
+# 输出文件
+dist/*.sql
+dist/*.js
