@@ -144,7 +144,23 @@ const Runner = {
       });
     });
   },
+  doExecSqlFile: function(script,mysqlDB) {
+    return new Promise((resolve, reject) => {
+      exec(script, (error, stdout, stderr) => {
+        if (error) {
+          log.info(`\n\texec error: ${error}`)
+          reject('run:dbCreator:failure');
+          return
+        }
+        // log.info(`\n\tstdout: ${stdout}`);
+        // log.info(`\n\tstderr: ${stderr}`);
+        log.info('\n\t' + mysqlDB.host + ' is updated!\n')
+        resolve('success');
+      })
+    });
+  },
   dbCreator: function(distPath, schemaName){
+    var self = this;
     return new Promise((resolve, reject) => {
       if (!distPath.endsWith("/")){
         distPath += "/";
@@ -154,21 +170,15 @@ const Runner = {
         reject('run:dbCreator:failure');
         return;
       }
-      for(let i = 0; i < mysqlDBList.length; i++){
-        const mysqlDB = mysqlDBList[i]
-        const script = 'mysql -h ' + mysqlDB.host + ' -u' + mysqlDB.user + ' -p' + mysqlDB.pw + ' < ' + sqlFile;
-        exec(script, (error, stdout, stderr) => {
-          if (error) {
-            log.info(`\n\texec error: ${error}`)
-            reject('run:dbCreator:failure');
-            return
-          }
-          // log.info(`\n\tstdout: ${stdout}`);
-          // log.info(`\n\tstderr: ${stderr}`);
-          log.info('\n\t' + mysqlDB.host + ' is updated!\n')
-          resolve('success');
-        })
-      }
+      return Promise.all(
+        mysqlDBList.map(function (mysqlDB) {
+          const script = 'mysql -h ' + mysqlDB.host + ' -u' + mysqlDB.user + ' -p' + mysqlDB.pw + ' < ' + sqlFile;
+          return self.doExecSqlFile(script,mysqlDB);
+        })).then(() => {
+          resolve("success");
+        }).catch(()=>{
+          reject('run:dbCreator:failure');
+        });
     });
   }
 }
