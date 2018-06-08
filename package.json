@@ -4,12 +4,14 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
-    "clean": "node app-clean.js",
-    "sql": "node app-sql.js",
-    "db": "node app-db.js",
-    "all": "npm run sql && npm run db"
+    "clean": "node app-run.js clean ./dist",
+    "sql": "node app-run.js sql ./dist",
+    "db": "node app-run.js db ./dist",
+    "clean,sql": "node app-run.js clean,sql ./dist",
+    "sql,db": "node app-run.js sql,db ./dist",
+    "clean,sql,db": "node app-run.js clean,sql,db ./dist",
+    "all": "npm run clean,sql,db"
   },
   "author": "archer",
   "license": "ISC",

@@ -37,5 +37,5 @@ jspm_packages
 .node_repl_history
 
 # 输出文件
-dist/*.sql
-dist/*.js
+dist
+dist
