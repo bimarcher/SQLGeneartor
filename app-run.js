@@ -88,7 +88,7 @@ const Runner = {
       log.info('\n\t请在命令中指定schema！！！！！！\n');
       return false;
     }
-    const schemaPath = `./conf/${schemaName}.conf`;
+    const schemaPath = `./conf/schema-config/${schemaName}.conf`;
     if (!fs.existsSync(schemaPath)){
       log.info(`\n\t不存在路径为【${schemaPath}】的schema的配置文件！！！！！！\n`);
       return false;
@@ -134,7 +134,7 @@ const Runner = {
         return;
       }
       template.run('./template');
-      schemaAnalyzer.run(`./conf/${schemaName}.conf`, `${distPath}${schemaName}.config.js`,
+      schemaAnalyzer.run(`./conf/schema-config/${schemaName}.conf`, `${distPath}${schemaName}.config.js`,
       `${distPath}${schemaName}.sql`, template, sqlGenerator).then((tag)=>{
         if(tag==='success'){
           resolve('success');
