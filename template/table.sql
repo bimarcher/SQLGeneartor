@@ -2,9 +2,7 @@
 -- {{tableComment}}{{tableAnnotation}}
 DROP TABLE IF EXISTS {{schemaName}}.{{tableName}};
 CREATE TABLE {{schemaName}}.{{tableName}}
-(
-  code varchar(25) NOT NULL COMMENT '本条记录的唯一标识，主键',
-  
+( 
 {{businessFileSql}}
   r_memo VARCHAR(100) NULL COMMENT '本条记录的备注',
   r_status INT(1) DEFAULT '1' NOT NULL COMMENT '本条记录的状态 0 无效 1 有效（默认值）其他待定义',
