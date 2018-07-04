@@ -10,5 +10,5 @@ CREATE TABLE {{schemaName}}.{{tableName}}
   r_create_by VARCHAR(25) DEFAULT '{{schemaName}}' NOT NULL COMMENT '本条记录的创建人',
   r_modify_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL COMMENT '本条记录的最后一次修改时间',
   r_modify_by VARCHAR(25) DEFAULT '{{schemaName}}' NOT NULL COMMENT '本条记录的最后一次修改人',
-  PRIMARY KEY (`code`)
+  PRIMARY KEY (`{{primaryKey}}`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT '{{tableComment}}';
