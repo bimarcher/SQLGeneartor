@@ -43,6 +43,17 @@ const Runner = {
   },
   doRun: function(type, distPath, schemaName) {
     return new Promise((resolve, reject) => {
+      if (type === "showSchemas"){
+        this.showSchemas().then((tag)=>{
+          if(tag==='success'){
+            resolve('success');
+          }else{
+            reject('run:doRun:showSchemas:failure');
+          }
+        });
+        return;
+      }
+
       if (type === "clean"){
         this.clean(distPath).then((tag)=>{
           if(tag==='success'){
@@ -179,6 +190,20 @@ const Runner = {
         }).catch(()=>{
           reject('run:dbCreator:failure');
         });
+    });
+  },
+  showSchemas: function(){
+    const schemaConfigPath = './conf/schema-config/';
+    return new Promise((resolve, reject) => {
+      fs.readdir(schemaConfigPath,function(err, files){
+        if (err) {
+          reject('run:showSchemas:failure' + err);;
+        }
+        files.forEach( function (file){
+          log.info(file);
+        });
+        resolve('success');
+      });
     });
   }
 }

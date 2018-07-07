@@ -11,7 +11,8 @@
     "clean,sql": "node app-run.js clean,sql ./dist",
     "sql,db": "node app-run.js sql,db ./dist",
     "clean,sql,db": "node app-run.js clean,sql,db ./dist",
-    "all": "npm run clean,sql,db"
+    "all": "npm run clean,sql,db",
+    "showSchemas": "node app-run.js showSchemas"
   },
   "author": "archer",
   "license": "ISC",
